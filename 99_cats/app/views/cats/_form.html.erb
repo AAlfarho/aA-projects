@@ -1,45 +1,58 @@
-<% if action == :new %>
-  <% action_url = cats_url %>
-<% else %>
-  <% action_url = cat_url(cat) %>
-<% end %>
+<% action = (cat.persisted? ? cat_url(cat) : cats_url) %>
+<% method = (cat.persisted? ? :patch : :post) %>
 
-
-<form class="" action=" <%= action_url %>" method="post">
-
-  <% if action == :edit %>
-    <input type="hidden" name="_method" value="PATCH">
-  <% end %>
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
 
   <label for="cat_name">Name</label>
-  <input id="cat_name"type="text" name="cat[name]" value="<%= cat.name %>">
+  <input
+    type="text"
+    name="cat[name]"
+    id="cat_name"
+    value="<%= cat.name %>">
+
+  <label for="cat_birth_date">Birth date</label>
+  <input
+    type="date"
+    name="cat[birth_date]"
+    id="cat_birth_date"
+    value="<%= cat.birth_date %>">
   <br>
-  <label>
-    Sex
-    <input type="radio" name="cat[sex]" value="m" checked="<%= cat.sex == 'm' ? true : false %>">
-        Male
-    <input type="radio" name="cat[sex]" value="f" checked="<%= cat.sex == 'f' ? true : false %>">
-        Female
-  </label>
-<br>
+
   <label for="cat_color">Color</label>
-  <select id="cat_color" name="cat[color]">
-    <% Cat.CAT_COLORS.each do |color| %>
-      <option value="<%= color %>"  <%= cat.color == color ? 'selected' : '' %> > <%= color.titleize %> </option>
+  <select name="cat[color]" id="cat_color">
+    <option></option>
+    <% Cat::CAT_COLORS.each do |color| %>
+      <option
+        <%= cat.color == color ? "selected" : "" %>
+        value="<%= color %>">
+        <%= color.upcase %>
+      </option>
     <% end %>
   </select>
-<br>
-  <label for="cat_birth_date">Birth date</label>
-  <input id="cat_birth_date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
-<br>
-  <label for="cat_description">Description</label>
-  <textarea id="cat_description" name="cat[description]">   <%= cat.description %>    </textarea>
-<br>
-  <!-- <input type="submit" name="" value="Add cat"> -->
+  <br>
 
-  <% if action == :edit %>
-    <input type="submit" name="" value="Update cat">
-    <% else %>
-    <input type="submit" name="" value="Add cat">
-  <% end %>
+  <input
+    type="radio"
+    name="cat[sex]"
+    value="M"
+    id="cat_sex_male"
+    <%= cat.sex == "M" ? "checked" : "" %>>
+  <label for="cat_sex_male">Male</label>
+  <input
+    type="radio"
+    name="cat[sex]"
+    value="F"
+    id="cat_sex_female"
+    <%= cat.sex == "F" ? "checked" : "" %>>
+  <label for="cat_sex_female">Female</label>
+  <br>
+
+  <label>
+    Description
+    <textarea name="cat[description]"><%= cat.description %></textarea>
+  </label>
+
+  <% submit_text = (cat.persisted? ? 'Update' : 'Create') + ' cat!' %>
+  <input type="submit" value="<%= submit_text %>">
 </form>

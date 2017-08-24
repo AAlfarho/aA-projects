@@ -1,5 +1,4 @@
 class CatsController < ApplicationController
-
   def index
     @cats = Cat.all
     render :index
@@ -16,12 +15,12 @@ class CatsController < ApplicationController
   end
 
   def create
-    cat = Cat.new(cat_params)
-
-    if cat.save!
-      redirect_to cat_url(cat)
+    @cat = Cat.new(cat_params)
+    if @cat.save
+      redirect_to cat_url(@cat)
     else
-      render json: cat.errors.full_messages, status: :unprocessable_entity
+      flash.now[:errors] = @cat.errors.full_messages
+      render :new
     end
   end
 
@@ -31,19 +30,18 @@ class CatsController < ApplicationController
   end
 
   def update
-    cat = Cat.find(params[:id])
-
-    if cat.update(cat_params)
-      redirect_to cat_url(cat)
+    @cat = Cat.find(params[:id])
+    if @cat.update_attributes(cat_params)
+      redirect_to cat_url(@cat)
     else
-      render json: cat.errors.full_messages, status: :unprocessable_entity
+      flash.now[:errors] = @cat.errors.full_messages
+      render :edit
     end
   end
 
   private
 
   def cat_params
-    params.require(:cat).permit(:name, :sex, :birth_date, :description, :color)
+    params.require(:cat).permit(:age, :birth_date, :color, :description, :name, :sex)
   end
-
 end
