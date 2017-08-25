@@ -20,9 +20,11 @@
   <tr>
     <th>Start Date</th>
     <th>End Date</th>
+    <th>User</th>
     <th>Status</th>
   </tr>
-  <% @cat.rental_requests.order('start_date').each do |req| %>
-    <%= render 'req_tr', req: req %>
+  <% show_buttons = @cat.owner.id == current_user.id %>
+  <% @cat.rental_requests.includes(:requester).order('start_date').each do |req| %>
+    <%= render 'req_tr', req: req, show_buttons: show_buttons %>
   <% end %>
 </table>

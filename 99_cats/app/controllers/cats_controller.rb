@@ -1,6 +1,10 @@
 class CatsController < ApplicationController
+
+  before_action :verify_owner, only: [:update, :edit]
+
   def index
     @cats = Cat.all
+    print request.env["HTTP_USER_AGENT"]
     render :index
   end
 
@@ -16,6 +20,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -36,6 +41,14 @@ class CatsController < ApplicationController
     else
       flash.now[:errors] = @cat.errors.full_messages
       render :edit
+    end
+  end
+
+  def verify_owner
+    @user = current_user
+    cat_id = params[:id]
+    if @user.cats.where(:id == cat_id).empty?
+      redirect_to root_url
     end
   end
 
