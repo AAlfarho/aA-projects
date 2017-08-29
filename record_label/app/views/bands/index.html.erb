@@ -1,0 +1,13 @@
+<table class="table table-striped table-hover ">
+<thead>
+  <th>Name</th>
+  <th>Edit</th>
+  <th>Delete</th>
+</thead>
+<tbody>
+<%= render @bands %>
+</tbody>
+</table>
+<%= link_to new_band_url, method: :get, class: 'btn btn-success' do%>
+ <%= icon('plus-circle') %>
+<% end %>

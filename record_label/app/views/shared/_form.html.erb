@@ -1,0 +1,16 @@
+<div class="container">
+  <form class="form-horizontal" action="<%= action_url %>" method="post">
+  <div class="form-group">
+    <%= auth_token %>
+      <% if action_url == users_url %>
+        <label for="username">User name:</label>
+        <input class="form-control" id="username" type="text" name="user[username]" value="<%= user.username %>">
+      <% end %>
+      <label for="email">Email:</label>
+      <input class="form-control" id="email" type="text" name="user[email]" value="<%= user.email %>">
+      <label for="password">Password:</label>
+      <input class="form-control" id="password" type="password" name="user[password]" value="">
+    </div>
+      <button type="submit" class="btn btn-primary"><%= submit_value %></button>
+  </form>
+</div>

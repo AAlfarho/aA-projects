@@ -1,0 +1,51 @@
+<form class="form-horizontal">
+  <fieldset>
+
+    <div class="form-group">
+      <label for="album-title" class="col-lg-2 control-label">Title</label>
+      <div class="col-lg-10">
+        <input type="text" name="album[title]" class="form-control" id="album-title" value="<%= album.title %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="album-year" class="col-lg-2 control-label">Release</label>
+      <div class="col-lg-10">
+        <input type="text" name="album[year]"class="form-control" id="album-year" value="<%= album.year %>">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="band-select" class="col-lg-2 control-label">Selects</label>
+      <div class="col-lg-10">
+        <select class="form-control" name="album[band_id]" id="band-select">
+          <% bands.each do |band| %>
+            <option value="<%= band.id %>"
+                    <%= "selected" if band.id = album.band_id %> >
+              <%= band %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" <%= "checked" if album.studio %> >
+            Studio
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

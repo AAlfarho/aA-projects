@@ -1,0 +1,11 @@
+  <form action="<%= action_url %>" method="post">
+  <div class="form-group">
+    <%= auth_token %>
+      <% unless action_url == bands_url %>
+      <input type="hidden" name="_method" value="PATCH">
+      <% end %>
+      <label for="band_name">Band name:</label>
+      <input class="form-control" id="band_name" type="text" name="band[name]" value="<%= band.name %>">
+    </div>
+      <button type="submit" class="btn btn-primary"><%= submit_value %></button>
+  </form>
