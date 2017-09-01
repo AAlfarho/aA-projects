@@ -96,14 +96,10 @@ function subsets(arr){
   }
   let sugar = arr.shift();
   let subs = subsets(arr.slice());
-  return subs.map(s => placeEverywhere(sugar, s));
-
-}
-
-function placeEverywhere(sugar, sub){
-  let arr = [];
-  for(let count = 0; count <= sub.length; count++){
-    arr.push(sub.slice().splice(count,0,sugar));
-  }
-  return arr;
+  return subs.concat(subs.map((s) => {
+      let newSub = s.slice();
+      newSub.push(sugar);
+      console.log(newSub);
+      return newSub;
+  }));
 }
