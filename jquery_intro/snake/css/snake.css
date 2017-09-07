@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+}
+
+.row {
+  list-style: none;
+  float: left;
+  height: 150px;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 15px;
+  border: 1px solid blue;
+  margin: 1px;
+  background: white;
+}
+
+.snake {
+  background-color: #ff0000;
+}
+
+.food {
+  background-color: #00ff00;
+}

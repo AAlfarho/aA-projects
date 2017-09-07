@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+}
+
+.row {
+  list-style: none;
+  float: left;
+  height: 150px;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 150px;
+  border: 1px solid blue;
+  margin: 1px;
+  font-size: 10rem;
+}
+
+.cell.played {
+  background: #c50000;
+}
+
+.cell.unplayed {
+  background: #39009e;
+}
+
+.cell.unplayed:hover {
+  background: #9affa0;
+}
