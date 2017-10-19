@@ -3,7 +3,7 @@
   <div class="form-group">
     <%= auth_token %>
       <% if action_url == users_url %>
-        <label for="username">User name:</label>
+        <label class="form-group" for="username">User name:</label>
         <input class="form-control" id="username" type="text" name="user[username]" value="<%= user.username %>">
       <% end %>
       <label for="email">Email:</label>

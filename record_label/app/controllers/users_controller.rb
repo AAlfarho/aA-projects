@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       ## user was successfully created, log the user in
       login!(@user)
-      redirect_to user(@user)
+      redirect_to user_url(@user)
     else
       flash[:error] = @user.errors.full_messages
       render :new
