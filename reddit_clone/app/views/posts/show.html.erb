@@ -1,0 +1,20 @@
+<h1><%= link_to @post.title, "http://#{@post.url}" %> by <%= @post.author.username %></h1>
+<%= @post.content %>
+<br>
+<ul>
+<% @post.subs.each do |s| %>
+  <li>
+    <%= link_to s.title, sub_url(s), method: :get %>
+  </li>
+<% end  %>
+</ul>
+<br>
+<h2>Comments</h2>
+<%= link_to "Comment on this post!", new_post_comment_url(@post), method: :get %>
+<ul>
+<% @post.comments.reverse.each do |post_comments| %>
+  <li>
+    <%= post_comments.content %>
+    <% end  %>
+  </li>
+</ul>
