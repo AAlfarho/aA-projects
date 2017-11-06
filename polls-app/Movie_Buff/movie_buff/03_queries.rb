@@ -49,7 +49,6 @@ def starring(whazzername)
   # ex. "Sylvester Stallone" is like "sylvester" and "lester stone" but
   # not like "stallone sylvester" or "zylvester ztallone"
   query = "%#{whazzername.chars.join('%')}%"
-
   Movie
     .select('movies.id, movies.title')
     .joins(:actors)
